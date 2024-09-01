@@ -18,7 +18,7 @@ IHostBuilder CreateHostBuilder(string[] args) =>
                 builder.AddApplicationInsights();
               });
 
-              services.AddScoped<ProjectDbContext>();
+              services.AddDbContext<ProjectDbContext>(options => options.UseSqlServer(Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING")));
             });
 
 using var host = CreateHostBuilder(args).Build();
