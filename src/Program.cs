@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -20,6 +20,16 @@ IHostBuilder CreateHostBuilder(string[] args) =>
 
               services.AddScoped<ProjectDbContext>();
             });
+
+using var host = CreateHostBuilder(args).Build();
+
+var logger = host.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation("Application started.");
+
+// application logic here
+
+host.Run();
+
 public class ProjectDbContext : DbContext
 {
   private readonly ILogger<ProjectDbContext> _logger;
